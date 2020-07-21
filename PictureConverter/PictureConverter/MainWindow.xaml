@@ -1,0 +1,31 @@
+﻿<Window x:Class="PictureConverter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PictureConverter"
+        mc:Ignorable="d"
+        FontSize="14"
+        Title="PC"
+        Height="720"
+        Width="1280"
+        MinHeight="720"
+        MaxHeight="720"
+        MinWidth="1280"
+        MaxWidth="1280"
+        Background="NavajoWhite">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="25,26,900,471">
+            <Image Margin="0" Cursor="Hand" x:Name="ImageBox"
+               IsEnabled="True" RenderTransformOrigin="1,1" Stretch="Fill"/>
+        </Border>
+        <TextBox TextWrapping="Wrap" Margin="25,253,25,38" IsEnabled="False"
+                 Background="LightGray" Name="AsciiOutputBox"/>
+        <Button Content="Convert"
+                Name="ConvertButton" Click="ConvertButton_Click" Margin="828,149,249,471" Background="Blue"/>
+        <Button Content="Refresh" Name="RefreshButton"
+                Click="RefreshButton_Click" Margin="1052,149,25,471" Background="Red"/>
+        <Button Content="Choose source image"
+                Name="SelectImageButton" Background="DarkOliveGreen" Margin="437,96,590,541" Click="SelectImageButton_Click"/>
+    </Grid>
+</Window>
