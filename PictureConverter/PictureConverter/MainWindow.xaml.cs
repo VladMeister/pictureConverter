@@ -1,25 +1,11 @@
-﻿using Microsoft.Win32;
+﻿using PictureConverter.Services;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PictureConverter
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -29,22 +15,56 @@ namespace PictureConverter
 
         private void ConvertButton_Click(object sender, RoutedEventArgs e)
         {
+            DisableConvertButton();
+            EnableSelectImageButton();
 
+            //Converter.GetImage(ImageBox.Source);
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
+            ImageBox.Source = null;
+            AsciiOutputBox.Text = null;
+
+            EnableSelectImageButton();
+            DisableConvertButton();
         }
 
         private void SelectImageButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Select a picture";
-            dialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
-            if (dialog.ShowDialog() == true)
+            string fileName = ImageSelector.SuccessfullSelect();
+
+            if (fileName != null)
             {
-                ImageBox.Source = new BitmapImage(new Uri(dialog.FileName));
+                ImageBox.Source = new BitmapImage(new Uri(fileName));
+
+                EnableConvertButton();
+                DisableSelectImageButton();
             }
+        }
+
+        private void EnableConvertButton()
+        {
+            ConvertButton.IsEnabled = true;
+            ConvertButton.Foreground = Brushes.White;
+        }
+
+        private void EnableSelectImageButton()
+        {
+            SelectImageButton.IsEnabled = true;
+            SelectImageButton.Foreground = Brushes.White;
+        }
+
+        private void DisableConvertButton()
+        {
+            ConvertButton.IsEnabled = false;
+            ConvertButton.Foreground = Brushes.DarkGray;
+        }
+
+        private void DisableSelectImageButton()
+        {
+            SelectImageButton.IsEnabled = false;
+            SelectImageButton.Foreground = Brushes.DarkGray;
         }
     }
 }
