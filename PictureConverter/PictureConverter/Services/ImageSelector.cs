@@ -4,7 +4,7 @@ namespace PictureConverter.Services
 {
     public static class ImageSelector
     {
-        public static string SuccessfullSelect()
+        public static string GetFileName()
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Select a picture";

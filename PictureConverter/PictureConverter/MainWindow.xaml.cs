@@ -8,6 +8,8 @@ namespace PictureConverter
 {
     public partial class MainWindow : Window
     {
+        public string FileName { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -18,7 +20,9 @@ namespace PictureConverter
             DisableConvertButton();
             EnableSelectImageButton();
 
-            //Converter.GetImage(ImageBox.Source);
+            AsciiOutputBox.Text = Converter.GetAsciiString(FileName);
+
+            AsciiOutputBox.IsEnabled = true;
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -32,11 +36,11 @@ namespace PictureConverter
 
         private void SelectImageButton_Click(object sender, RoutedEventArgs e)
         {
-            string fileName = ImageSelector.SuccessfullSelect();
+            FileName = ImageSelector.GetFileName();
 
-            if (fileName != null)
+            if (FileName != null)
             {
-                ImageBox.Source = new BitmapImage(new Uri(fileName));
+                ImageBox.Source = new BitmapImage(new Uri(FileName));
 
                 EnableConvertButton();
                 DisableSelectImageButton();
