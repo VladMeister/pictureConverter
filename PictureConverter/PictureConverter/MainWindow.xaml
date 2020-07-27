@@ -19,13 +19,17 @@
             <Image Margin="0" Cursor="Hand" x:Name="ImageBox"
                IsEnabled="True" RenderTransformOrigin="1,1" Stretch="Fill"/>
         </Border>
-        <TextBox TextWrapping="Wrap" Margin="25,253,25,38" IsEnabled="False"
-                 Background="LightGray" Name="AsciiOutputBox"/>
         <Button Content="C o n v e r t" Name="ConvertButton" Click="ConvertButton_Click"
                 Margin="828,149,249,471" Background="LimeGreen" IsEnabled="False" Foreground="DarkGray"/>
         <Button Content="R e f r e s h" Name="RefreshButton" Click="RefreshButton_Click"
                 Foreground="White" Margin="1052,149,25,471" Background="DarkOrange"/>
         <Button Content="Choose source image" Name="SelectImageButton" Background="CornflowerBlue"
                 Foreground="White" Margin="437,96,590,541" Click="SelectImageButton_Click"/>
+        <Border BorderBrush="DimGray" BorderThickness="1" Margin="25,254,25,25">
+            <TextBox x:Name="AsciiOutputTextBox" Margin="0" 
+                 TextWrapping="Wrap" FontFamily="Consolas" FontSize="3"
+                 IsEnabled="False" Width="1230" Height="420"
+                 TextAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
     </Grid>
 </Window>

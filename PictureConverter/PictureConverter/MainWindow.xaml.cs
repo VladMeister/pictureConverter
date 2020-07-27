@@ -1,5 +1,6 @@
 ﻿using PictureConverter.Services;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -18,17 +19,16 @@ namespace PictureConverter
         private void ConvertButton_Click(object sender, RoutedEventArgs e)
         {
             DisableConvertButton();
-            EnableSelectImageButton();
 
-            AsciiOutputBox.Text = Converter.GetAsciiString(FileName);
+            AsciiOutputTextBox.AppendText(Converter.GetAsciiString(FileName));
 
-            AsciiOutputBox.IsEnabled = true;
+            AsciiOutputTextBox.IsEnabled = true;
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             ImageBox.Source = null;
-            AsciiOutputBox.Text = null;
+            AsciiOutputTextBox.Text = null;
 
             EnableSelectImageButton();
             DisableConvertButton();

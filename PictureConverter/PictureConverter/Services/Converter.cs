@@ -25,30 +25,26 @@ namespace PictureConverter.Services
             {
                 bitmap = new Bitmap(fileName);
 
-                result.Append("<br/>");
-
-                for (int y = 0; y < bitmap.Height; y++)
+                for (int y = 0; y < bitmap.Height; y+=4)
                 {
-                    for (int x = 0; x < bitmap.Width; x++)
+                    for (int x = 0; x < bitmap.Width; x+=3)
                     {
-                        Color col = bitmap.GetPixel(x, y);
+                        Color color = bitmap.GetPixel(x, y);
 
-                        col = Color.FromArgb((col.R + col.G + col.B) / 3,
-                            (col.R + col.G + col.B) / 3,
-                            (col.R + col.G + col.B) / 3);
+                        color = Color.FromArgb((color.R + color.G + color.B) / 3,
+                            (color.R + color.G + color.B) / 3,
+                            (color.R + color.G + color.B) / 3);
 
-                        int redValue = int.Parse(col.R.ToString());
+                        int redValue = int.Parse(color.R.ToString());
 
                         result.Append(GetGrayShade(redValue));
 
-                        if (x == bitmap.Width - 1)
+                        if (x >= bitmap.Width - 3)
                         {
-                            result.Append("<br/>");
+                            result.Append('\n');
                         }
                     }
                 }
-
-                result.Append("<br/>");
 
                 return result.ToString();
             }
