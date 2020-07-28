@@ -95,9 +95,13 @@ namespace PictureConverter
             {
                 AsciiOutputTextBox.FontSize = 1;
             }
+            else if (SizeComboBox.Text == "Small")
+            {
+                AsciiOutputTextBox.FontSize = 7;
+            }
             else
             {
-                AsciiOutputTextBox.FontSize = 3;
+                AsciiOutputTextBox.FontSize = 4;
             }
         }
     }
