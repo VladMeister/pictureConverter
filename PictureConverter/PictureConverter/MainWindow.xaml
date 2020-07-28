@@ -24,12 +24,19 @@
         <Button Content="R e f r e s h" Name="RefreshButton" Click="RefreshButton_Click"
                 Foreground="White" Margin="1052,149,25,471" Background="DarkOrange"/>
         <Button Content="Choose source image" Name="SelectImageButton" Background="CornflowerBlue"
-                Foreground="White" Margin="437,96,590,541" Click="SelectImageButton_Click"/>
+                Foreground="White" Margin="437,26,590,611" Click="SelectImageButton_Click"/>
         <Border BorderBrush="DimGray" BorderThickness="1" Margin="25,254,25,25">
-            <TextBox x:Name="AsciiOutputTextBox" Margin="0" 
-                 TextWrapping="Wrap" FontFamily="Consolas" FontSize="3"
+            <TextBox Name="AsciiOutputTextBox" Margin="0" 
+                 TextWrapping="Wrap" FontFamily="Consolas" FontSize="2"
                  IsEnabled="False" Width="1230" Height="420"
                  TextAlignment="Center" VerticalAlignment="Center"/>
         </Border>
+        <ComboBox Margin="539,100,488,545" Name="SizeComboBox"
+                  Text="Select output size" Foreground="DimGray">
+            <TextBlock>Large</TextBlock>
+            <TextBlock>Medium</TextBlock>
+            <TextBlock>Small</TextBlock>
+        </ComboBox>
+        <Label Content="Output size: " Margin="403,104,746,513"/>
     </Grid>
 </Window>

@@ -4,8 +4,11 @@ using System.Text;
 
 namespace PictureConverter.Services
 {
-    public static class Converter
+    public class Converter
     {
+        private int _heightSkip;
+        private int _widthSkip;
+
         private const string BLACK = "@";
         private const string CHARCOAL = "#";
         private const string DARKGRAY = "8";
@@ -16,18 +19,20 @@ namespace PictureConverter.Services
         private const string LIGHTGRAY = ".";
         private const string WHITE = " ";
 
-        public static string GetAsciiString(string fileName)
+        public string GetAsciiString(string fileName, string sizeOption)
         {
             StringBuilder result = new StringBuilder();
             Bitmap bitmap = null;
+
+            SetSizeSkipers(sizeOption);
 
             try
             {
                 bitmap = new Bitmap(fileName);
 
-                for (int y = 0; y < bitmap.Height; y+=4)
+                for (int y = 0; y < bitmap.Height; y += _heightSkip)
                 {
-                    for (int x = 0; x < bitmap.Width; x+=3)
+                    for (int x = 0; x < bitmap.Width; x += _widthSkip)
                     {
                         Color color = bitmap.GetPixel(x, y);
 
@@ -39,7 +44,7 @@ namespace PictureConverter.Services
 
                         result.Append(GetGrayShade(redValue));
 
-                        if (x >= bitmap.Width - 3)
+                        if (x >= bitmap.Width - _widthSkip)
                         {
                             result.Append('\n');
                         }
@@ -58,7 +63,26 @@ namespace PictureConverter.Services
             }
         }
 
-        private static string GetGrayShade(int redValue)
+        private void SetSizeSkipers(string sizeOption)
+        {
+            switch (sizeOption)
+            {
+                case "Large":
+                    _heightSkip = 2;
+                    _widthSkip = 1;
+                    break;
+                case "Small":
+                    _heightSkip = 16;
+                    _widthSkip = 9;
+                    break;
+                default:
+                    _heightSkip = 10;
+                    _widthSkip = 5;
+                    break;
+            }
+        }
+
+        private string GetGrayShade(int redValue)
         {
             string value = " ";
 

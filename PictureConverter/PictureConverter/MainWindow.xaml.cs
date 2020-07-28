@@ -10,17 +10,22 @@ namespace PictureConverter
     public partial class MainWindow : Window
     {
         public string FileName { get; set; }
+        private readonly Converter _converter;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _converter = new Converter();
         }
 
         private void ConvertButton_Click(object sender, RoutedEventArgs e)
         {
             DisableConvertButton();
+            DisableSizeComboBox();
+            OptimizeFontSize();
 
-            AsciiOutputTextBox.AppendText(Converter.GetAsciiString(FileName));
+            AsciiOutputTextBox.AppendText(_converter.GetAsciiString(FileName, SizeComboBox.Text));
 
             AsciiOutputTextBox.IsEnabled = true;
         }
@@ -29,9 +34,12 @@ namespace PictureConverter
         {
             ImageBox.Source = null;
             AsciiOutputTextBox.Text = null;
+            SizeComboBox.Text = null;
 
             EnableSelectImageButton();
             DisableConvertButton();
+            EnableSizeComboBox();
+            OptimizeFontSize();
         }
 
         private void SelectImageButton_Click(object sender, RoutedEventArgs e)
@@ -59,6 +67,11 @@ namespace PictureConverter
             SelectImageButton.Foreground = Brushes.White;
         }
 
+        private void EnableSizeComboBox()
+        {
+            SizeComboBox.IsEnabled = true;
+        }
+
         private void DisableConvertButton()
         {
             ConvertButton.IsEnabled = false;
@@ -69,6 +82,23 @@ namespace PictureConverter
         {
             SelectImageButton.IsEnabled = false;
             SelectImageButton.Foreground = Brushes.DarkGray;
+        }
+
+        private void DisableSizeComboBox()
+        {
+            SizeComboBox.IsEnabled = false;
+        }
+
+        private void OptimizeFontSize()
+        {
+            if (SizeComboBox.Text == "Large")
+            {
+                AsciiOutputTextBox.FontSize = 1;
+            }
+            else
+            {
+                AsciiOutputTextBox.FontSize = 3;
+            }
         }
     }
 }
