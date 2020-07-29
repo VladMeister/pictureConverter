@@ -21,7 +21,7 @@ namespace PictureConverter.Services
 
         public string GetAsciiString(string fileName, string sizeOption)
         {
-            StringBuilder result = new StringBuilder();
+            var result = new StringBuilder();
             Bitmap bitmap = null;
 
             SetSizeSkipers(sizeOption);
@@ -29,12 +29,13 @@ namespace PictureConverter.Services
             try
             {
                 bitmap = new Bitmap(fileName);
+                OptimizeImageSize(bitmap.Height, bitmap.Width);
 
                 for (int y = 0; y < bitmap.Height; y += _heightSkip)
                 {
                     for (int x = 0; x < bitmap.Width; x += _widthSkip)
                     {
-                        Color color = bitmap.GetPixel(x, y);
+                        var color = bitmap.GetPixel(x, y);
 
                         color = Color.FromArgb((color.R + color.G + color.B) / 3,
                             (color.R + color.G + color.B) / 3,
@@ -124,6 +125,21 @@ namespace PictureConverter.Services
             }
 
             return value;
+        }
+
+        private void OptimizeImageSize(int height, int width)
+        {
+            if (height >= 1080 && width > 1920
+                && height < 2160 && width <= 3840)
+            {
+                _heightSkip *= 2;
+                _widthSkip *= 2;
+            }
+            else if (height >= 2160 && width > 3840)
+            {
+                _heightSkip *= 4;
+                _widthSkip *= 4;
+            }
         }
     }
 }
