@@ -1,6 +1,5 @@
 ﻿using PictureConverter.Services;
 using System;
-using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -19,9 +18,9 @@ namespace PictureConverter
             _converter = new Converter();
         }
 
-        private void ConvertButton_Click(object sender, RoutedEventArgs e)
+        private void ConvertToGrayButton_Click(object sender, RoutedEventArgs e)
         {
-            DisableConvertButton();
+            DisableConvertToGrayButton();
             DisableSizeComboBox();
             OptimizeFontSize();
 
@@ -30,14 +29,27 @@ namespace PictureConverter
             AsciiOutputTextBox.IsEnabled = true;
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private void ConvertToColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisableConvertToColorButton();
+            DisableSizeComboBox();
+            EnableWebBrowserOutput();
+
+            WebBrowserOutput.NavigateToString($"<html><head></head><body>{HtmlConverter.GetHtmlColoredString(FileName)}</body></html>");
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             ImageBox.Source = null;
             AsciiOutputTextBox.Text = null;
             SizeComboBox.Text = null;
+            AsciiOutputTextBox.IsEnabled = false;
+            WebBrowserOutput.Source = null;
 
             EnableSelectImageButton();
-            DisableConvertButton();
+            DisableConvertToGrayButton();
+            DisableConvertToColorButton();
+            DisableWebBrowserOutput();
             EnableSizeComboBox();
             OptimizeFontSize();
         }
@@ -50,15 +62,22 @@ namespace PictureConverter
             {
                 ImageBox.Source = new BitmapImage(new Uri(FileName));
 
-                EnableConvertButton();
+                EnableConvertToGrayButton();
+                EnableConvertToColorButton();
                 DisableSelectImageButton();
             }
         }
 
-        private void EnableConvertButton()
+        private void EnableConvertToGrayButton()
         {
-            ConvertButton.IsEnabled = true;
-            ConvertButton.Foreground = Brushes.White;
+            ConvertToGrayButton.IsEnabled = true;
+            ConvertToGrayButton.Foreground = Brushes.White;
+        }
+
+        private void EnableConvertToColorButton()
+        {
+            ConvertToColorButton.IsEnabled = true;
+            ConvertToColorButton.Foreground = Brushes.White;
         }
 
         private void EnableSelectImageButton()
@@ -72,10 +91,23 @@ namespace PictureConverter
             SizeComboBox.IsEnabled = true;
         }
 
-        private void DisableConvertButton()
+        private void EnableWebBrowserOutput()
         {
-            ConvertButton.IsEnabled = false;
-            ConvertButton.Foreground = Brushes.DarkGray;
+            WebBrowserOutput.IsEnabled = true;
+            WebBrowserOutput.Visibility = Visibility.Visible;
+            AsciiOutputTextBox.Visibility = Visibility.Hidden;
+        }
+
+        private void DisableConvertToGrayButton()
+        {
+            ConvertToGrayButton.IsEnabled = false;
+            ConvertToGrayButton.Foreground = Brushes.DarkGray;
+        }
+
+        private void DisableConvertToColorButton()
+        {
+            ConvertToColorButton.IsEnabled = false;
+            ConvertToColorButton.Foreground = Brushes.DarkGray;
         }
 
         private void DisableSelectImageButton()
@@ -87,6 +119,13 @@ namespace PictureConverter
         private void DisableSizeComboBox()
         {
             SizeComboBox.IsEnabled = false;
+        }
+
+        private void DisableWebBrowserOutput()
+        {
+            WebBrowserOutput.IsEnabled = false;
+            WebBrowserOutput.Visibility = Visibility.Hidden;
+            AsciiOutputTextBox.Visibility = Visibility.Visible;
         }
 
         private void OptimizeFontSize()
