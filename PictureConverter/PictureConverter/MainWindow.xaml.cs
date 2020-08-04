@@ -9,22 +9,25 @@ namespace PictureConverter
     public partial class MainWindow : Window
     {
         public string FileName { get; set; }
-        private readonly Converter _converter;
+        private readonly GrayConverter _grayConverter;
+        private readonly HtmlConverter _htmlConverter;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _converter = new Converter();
+            _grayConverter = new GrayConverter();
+            _htmlConverter = new HtmlConverter();
         }
 
         private void ConvertToGrayButton_Click(object sender, RoutedEventArgs e)
         {
             DisableConvertToGrayButton();
             DisableSizeComboBox();
+            DisableConvertToColorButton();
             OptimizeFontSize();
 
-            AsciiOutputTextBox.AppendText(_converter.GetAsciiString(FileName, SizeComboBox.Text));
+            AsciiOutputTextBox.AppendText(_grayConverter.GetAsciiString(FileName, SizeComboBox.Text));
 
             AsciiOutputTextBox.IsEnabled = true;
         }
@@ -33,9 +36,11 @@ namespace PictureConverter
         {
             DisableConvertToColorButton();
             DisableSizeComboBox();
+            DisableConvertToGrayButton();
             EnableWebBrowserOutput();
 
-            WebBrowserOutput.NavigateToString($"<html><head></head><body>{HtmlConverter.GetHtmlColoredString(FileName)}</body></html>");
+            WebBrowserOutput
+                .NavigateToString($"<html><head></head><body style='background-color:black;'>{_htmlConverter.GetHtmlColoredString(FileName)}</body></html>");
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)

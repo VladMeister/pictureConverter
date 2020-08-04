@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PictureConverter.Services
 {
-    public class Converter
+    public class GrayConverter
     {
         private int _heightSkip;
         private int _widthSkip;

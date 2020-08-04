@@ -16,10 +16,11 @@
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1" Margin="25,29,900,656">
             <Image Cursor="Hand" x:Name="ImageBox"
-               IsEnabled="True" RenderTransformOrigin="1,1" Stretch="Fill" Margin="0"/>
+               IsEnabled="True" RenderTransformOrigin="1,1" Stretch="Fill"
+                   Margin="0"/>
         </Border>
         <Button Content="C o n v e r t (gray)" Name="ConvertToGrayButton" Click="ConvertToGrayButton_Click"
-                Margin="913,139,180,656" Background="LimeGreen" IsEnabled="False" Foreground="DarkGray"/>
+                Margin="834,139,180,656" Background="LimeGreen" IsEnabled="False" Foreground="DarkGray"/>
         <Button Content="C l e a r" Name="RefreshButton" Click="ClearButton_Click"
                 Foreground="White" Margin="1129,139,25,656" Background="DarkOrange"/>
         <Button Content="Choose source image" Name="SelectImageButton" Background="CornflowerBlue"
@@ -30,14 +31,14 @@
                  IsEnabled="False" Width="1230" Height="646"
                  TextAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <ComboBox Margin="556,107,597,716" Name="SizeComboBox"
+        <ComboBox Margin="973,77,180,745" Name="SizeComboBox"
                   Text="Select output size" Foreground="DimGray">
             <TextBlock>Large</TextBlock>
             <TextBlock>Medium</TextBlock>
             <TextBlock>Small</TextBlock>
         </ComboBox>
-        <Label Content="Output size: " Margin="426,107,724,720"/>
-        <Button Content="C o n v e r t (color)" Margin="688,139,391,656" Name="ConvertToColorButton"
+        <Label Content="Output size: " Margin="834,82,307,745"/>
+        <Button Content="C o n v e r t (color)" Margin="430,139,649,656" Name="ConvertToColorButton"
                 Background="Crimson" IsEnabled="False" Foreground="DarkGray" Click="ConvertToColorButton_Click"/>
         <WebBrowser Margin="25,233,25,5" x:Name="WebBrowserOutput" Visibility="Hidden" IsEnabled="False"/>
     </Grid>
