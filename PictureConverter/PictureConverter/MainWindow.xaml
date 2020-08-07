@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         FontSize="20"
         FontFamily="Georgia"
@@ -31,15 +30,17 @@
                  IsEnabled="False" Width="1230" Height="646"
                  TextAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <ComboBox Margin="973,77,180,745" Name="SizeComboBox"
+        <ComboBox Margin="973,64,180,745" Name="SizeComboBox"
                   Text="Select output size" Foreground="DimGray">
             <TextBlock>Large</TextBlock>
             <TextBlock>Medium</TextBlock>
             <TextBlock>Small</TextBlock>
         </ComboBox>
-        <Label Content="Output size: " Margin="834,82,307,745"/>
+        <Label Content="Output size: " Margin="834,64,307,745"/>
         <Button Content="C o n v e r t (color)" Margin="430,139,649,656" Name="ConvertToColorButton"
                 Background="Crimson" IsEnabled="False" Foreground="DarkGray" Click="ConvertToColorButton_Click"/>
         <WebBrowser Margin="25,233,25,5" x:Name="WebBrowserOutput" Visibility="Hidden" IsEnabled="False"/>
+        <Button Content="Save" Margin="661,154,511,670" x:Name="SaveButton"
+                Visibility="Hidden" Background="DimGray" Click="SaveButton_Click" Foreground="White"/>
     </Grid>
 </Window>

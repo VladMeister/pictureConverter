@@ -41,7 +41,7 @@ namespace PictureConverter.Services
                             (color.R + color.G + color.B) / 3,
                             (color.R + color.G + color.B) / 3);
 
-                        int redValue = int.Parse(color.R.ToString());
+                        var redValue = int.Parse(color.R.ToString());
 
                         result.Append(GetGrayShade(redValue));
 
@@ -85,7 +85,7 @@ namespace PictureConverter.Services
 
         private string GetGrayShade(int redValue)
         {
-            string value = " ";
+            var value = " ";
 
             if (redValue >= 230)
             {

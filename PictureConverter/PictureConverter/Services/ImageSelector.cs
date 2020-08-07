@@ -6,9 +6,9 @@ namespace PictureConverter.Services
     {
         public static string GetFileName()
         {
-            OpenFileDialog dialog = new OpenFileDialog();
+            var dialog = new OpenFileDialog();
             dialog.Title = "Select a picture";
-            dialog.Filter = "*.jpg; *.jpeg; *.gif; *.bmp|*.jpg; *.jpeg; *.gif; *.bmp";
+            dialog.Filter = "*.jpg; *.jpeg; *.png; *.bmp|*.jpg; *.jpeg; *.png; *.bmp";
 
             if (dialog.ShowDialog() == true)
             {

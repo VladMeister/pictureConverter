@@ -21,9 +21,9 @@ namespace PictureConverter.Services
                     {
                         var color = bitmap.GetPixel(x, y);
 
-                        int redValue = int.Parse(color.R.ToString());
-                        int greenValue = int.Parse(color.G.ToString());
-                        int blueValue = int.Parse(color.B.ToString());
+                        var redValue = int.Parse(color.R.ToString());
+                        var greenValue = int.Parse(color.G.ToString());
+                        var blueValue = int.Parse(color.B.ToString());
 
                         result.Append(SetSymbolShade(redValue, greenValue, blueValue));
 
@@ -48,8 +48,7 @@ namespace PictureConverter.Services
 
         private string SetSymbolShade(int redValue, int greenValue, int blueValue)
         {
-            var random = new Random();
-            int randomNumber = random.Next(0, 2);
+            var randomNumber = new Random().Next(0, 10);
 
             return $"<font size='3' color=rgb({redValue},{greenValue},{blueValue})>{randomNumber}</font>";
         }

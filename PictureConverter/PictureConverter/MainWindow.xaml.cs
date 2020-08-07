@@ -1,5 +1,6 @@
 ﻿using PictureConverter.Services;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -9,6 +10,7 @@ namespace PictureConverter
     public partial class MainWindow : Window
     {
         public string FileName { get; set; }
+        private string htmlOutput { get; set; }
         private readonly GrayConverter _grayConverter;
         private readonly HtmlConverter _htmlConverter;
 
@@ -34,13 +36,22 @@ namespace PictureConverter
 
         private void ConvertToColorButton_Click(object sender, RoutedEventArgs e)
         {
-            DisableConvertToColorButton();
-            DisableSizeComboBox();
-            DisableConvertToGrayButton();
-            EnableWebBrowserOutput();
+            if (ImageBox.Source.Width >= 600)
+            {
+                DisableConvertToColorButton();
+                DisableSizeComboBox();
+                DisableConvertToGrayButton();
+                EnableWebBrowserOutput();
+                SaveButton.Visibility = Visibility.Visible;
 
-            WebBrowserOutput
-                .NavigateToString($"<html><head></head><body style='background-color:black;'>{_htmlConverter.GetHtmlColoredString(FileName)}</body></html>");
+                htmlOutput = $"<html><body style='background-color:black;'>{_htmlConverter.GetHtmlColoredString(FileName)}</body></html>";
+
+                WebBrowserOutput.NavigateToString(htmlOutput);
+            }
+            else
+            {
+                MessageBox.Show("Minimum width of colored picture is 600px.", "Error");
+            }
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -50,6 +61,9 @@ namespace PictureConverter
             SizeComboBox.Text = null;
             AsciiOutputTextBox.IsEnabled = false;
             WebBrowserOutput.Source = null;
+            SaveButton.IsEnabled = true;
+            SaveButton.Visibility = Visibility.Hidden;
+            SaveButton.Content = "Save";
 
             EnableSelectImageButton();
             DisableConvertToGrayButton();
@@ -147,6 +161,14 @@ namespace PictureConverter
             {
                 AsciiOutputTextBox.FontSize = 5;
             }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            ImageConverter.ConvertAndSaveImage(htmlOutput);
+            SaveButton.Content = "Saved";
+            SaveButton.IsEnabled = false;
+            SaveButton.Foreground = Brushes.DarkGray;
         }
     }
 }
