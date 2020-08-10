@@ -63,6 +63,7 @@ namespace PictureConverter
             WebBrowserOutput.Source = null;
             SaveButton.IsEnabled = true;
             SaveButton.Visibility = Visibility.Hidden;
+            SaveButton.Foreground = Brushes.White;
             SaveButton.Content = "Save";
 
             EnableSelectImageButton();
