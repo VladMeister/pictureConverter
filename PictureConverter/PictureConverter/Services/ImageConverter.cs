@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Win32;
 using System.IO;
-using System.Text;
 
 namespace PictureConverter.Services
 {
@@ -13,9 +11,16 @@ namespace PictureConverter.Services
             {
                 var converter = new CoreHtmlToImage.HtmlConverter();
                 var bytes = converter.FromHtmlString(htmlString);
-                Directory.CreateDirectory("D:\\HtmlImages");
-                //save window
-                File.WriteAllBytes("D:\\HtmlImages\\image.jpg", bytes);
+
+                var saveFileDialog = new SaveFileDialog();
+                saveFileDialog.FileName = "defaultName";
+                saveFileDialog.Title = "Save image";
+                saveFileDialog.Filter = "Image file (*.jpg)|*.jpg";
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, bytes);
+                }
             }
         }
     }

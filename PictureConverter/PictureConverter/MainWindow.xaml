@@ -40,7 +40,7 @@
         <Button Content="C o n v e r t (color)" Margin="430,139,649,656" Name="ConvertToColorButton"
                 Background="Crimson" IsEnabled="False" Foreground="DarkGray" Click="ConvertToColorButton_Click"/>
         <WebBrowser Margin="25,233,25,5" x:Name="WebBrowserOutput" Visibility="Hidden" IsEnabled="False"/>
-        <Button Content="Save" Margin="661,154,511,670" x:Name="SaveButton"
+        <Button Content="Save" Margin="661,154,511,656" x:Name="SaveButton"
                 Visibility="Hidden" Background="DimGray" Click="SaveButton_Click" Foreground="White"/>
     </Grid>
 </Window>
