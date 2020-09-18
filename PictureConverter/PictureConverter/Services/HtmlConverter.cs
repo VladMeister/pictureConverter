@@ -15,9 +15,9 @@ namespace PictureConverter.Services
             {
                 bitmap = new Bitmap(fileName);
 
-                for (int y = 0; y < bitmap.Height; y+=16)
+                for (int y = 0; y < bitmap.Height; y += 16)
                 {
-                    for (int x = 0; x < bitmap.Width; x+=9)
+                    for (int x = 0; x < bitmap.Width; x += 9)
                     {
                         var color = bitmap.GetPixel(x, y);
 
